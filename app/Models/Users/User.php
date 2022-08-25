@@ -22,6 +22,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+
     protected $fillable = [
         'over_name',
         'under_name',
@@ -71,7 +72,8 @@ class User extends Authenticatable
     }
 
     public function subjects(){
-        return ;// リレーションの定義
+        return $this->hasMany('App\Models\Users\Subjects');
+        // リレーションの定義
     }
 
     // いいねしているかどうか
