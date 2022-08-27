@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
             'sex' => '1',
             'birth_day' => '2019-06-03 00:00:00',
             'role' => '1',
-            'password' => 'atlas123',
+            'password' => bcrypt('atlas123'),
         ]);
     }
 }
