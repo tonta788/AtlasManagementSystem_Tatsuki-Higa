@@ -54,7 +54,6 @@ class LoginController extends Controller
         }else{
             return redirect('/login')->with('flash_message', 'name or password is incorrect');
         }
-        return view("auth.login.login");
     }
 
 }
