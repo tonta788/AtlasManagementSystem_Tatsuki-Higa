@@ -69,8 +69,26 @@ class PostsController extends Controller
         Post::findOrFail($id)->delete();
         return redirect()->route('post.show');
     }
+
     public function mainCategoryCreate(Request $request){
+        $rules = [
+            'main_category' => 'required|string|max:100|unique:main_categories',
+        ];
+        $this->validate($request, $rules);
         MainCategory::create(['main_category' => $request->main_category_name]);
+        return redirect()->route('post.input');
+    }
+    public function subCategoryCreate(Request $request){
+        $rules = [
+            'main_category_id' => 'required',
+            'sub_category' => 'required|string|max:100|unique:sub_categories',
+        ];
+        $this->validate($request, $rules);
+        SubCategory::create([
+            'main_category_id' => $request->main_category_id,
+            'sub_category' => $request->sub_category_name
+        ]);
+
         return redirect()->route('post.input');
     }
 
