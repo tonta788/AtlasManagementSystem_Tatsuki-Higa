@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Authenticated\BulletinBoard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Categories\MainCategory;
 use App\Models\Categories\SubCategory;
 use App\Models\Posts\Post;
@@ -45,7 +46,8 @@ class PostsController extends Controller
 
     public function postInput(){
         $main_categories = MainCategory::get();
-        return view('authenticated.bulletinboard.post_create', compact('main_categories'));
+        $sub_categories = SubCategory::get();
+        return view('authenticated.bulletinboard.post_create', compact('main_categories','sub_categories'));
     }
 
     public function postCreate(PostFormRequest $request){
@@ -71,19 +73,17 @@ class PostsController extends Controller
     }
 
     public function mainCategoryCreate(Request $request){
-        $rules = [
-            'main_category' => 'required|string|max:100|unique:main_categories',
-        ];
-        $this->validate($request, $rules);
+        // $request->validate([
+        //     'main_category' => 'required|string|max:100|unique:main_categories',
+        // ]);
         MainCategory::create(['main_category' => $request->main_category_name]);
         return redirect()->route('post.input');
     }
     public function subCategoryCreate(Request $request){
-        $rules = [
-            'main_category_id' => 'required',
-            'sub_category' => 'required|string|max:100|unique:sub_categories',
-        ];
-        $this->validate($request, $rules);
+        // $request->validate([
+        //     'main_category_id' => 'required',
+        //     'sub_category' => 'required|string|max:100|unique:sub_categories',
+        // ]);
         SubCategory::create([
             'main_category_id' => $request->main_category_id,
             'sub_category' => $request->sub_category_name
