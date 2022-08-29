@@ -9,7 +9,7 @@
           </div>
           <div>
             <span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
-            <a href="{{ route('post.delete', ['id' => $post->id]) }}">削除</a>
+            <a href="{{ route('post.delete', ['id' => $post->id]) }}" onclick="return confirm('削除してよろしいですか？')">削除</a>
           </div>
         </div>
 
@@ -66,7 +66,7 @@
         <div class="w-50 m-auto edit-modal-btn d-flex">
           <a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>
           <input type="hidden" class="edit-modal-hidden" name="post_id" value="">
-          <input type="submit" class="btn btn-primary d-block" value="編集">
+          <input type="submit" class="btn btn-primary d-block" value="編集" onclick="return confirm('編集してよろしいですか？')">
         </div>
       </div>
       {{ csrf_field() }}
