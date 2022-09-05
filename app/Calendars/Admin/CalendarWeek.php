@@ -23,6 +23,7 @@ class CalendarWeek{
     $tmpDay = $startDay->copy();
 
     while($tmpDay->lte($lastDay)){
+      // 前の月、もしくは後ろの月の場合は空白を表示
       if($tmpDay->month != $this->carbon->month){
         $day = new CalendarWeekBlankDay($tmpDay->copy());
         $days[] = $day;

@@ -2,6 +2,7 @@
 namespace App\Calendars\General;
 
 use Carbon\Carbon;
+use App\Models\Users\User;
 use Auth;
 
 class CalendarView{
@@ -41,7 +42,8 @@ class CalendarView{
         $toDay = $this->carbon->copy()->format("Y-m-d");
 
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-          $html[] = '<td class="calendar-td">';
+          // $html[] = '<td class="calendar-td">';
+          $html[] = '<td class="past-day border">';
         }else{
           $html[] = '<td class="calendar-td '.$day->getClassName().'">';
         }
@@ -64,8 +66,13 @@ class CalendarView{
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }
         }else{
+          if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+          $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
+          }else{
           $html[] = $day->selectPart($day->everyDay());
+          }
         }
+
         $html[] = $day->getDate();
         $html[] = '</td>';
       }
