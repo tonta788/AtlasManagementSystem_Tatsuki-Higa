@@ -73,17 +73,19 @@ class PostsController extends Controller
     }
 
     public function mainCategoryCreate(Request $request){
-        // $request->validate([
-        //     'main_category' => 'required|string|max:100|unique:main_categories',
-        // ]);
+        $request->validate([
+            'main_category_name' => 'required|string|max:100|unique:main_categories,main_category',
+        ]);
+
         MainCategory::create(['main_category' => $request->main_category_name]);
+
         return redirect()->route('post.input');
     }
     public function subCategoryCreate(Request $request){
-        // $request->validate([
-        //     'main_category_id' => 'required',
-        //     'sub_category' => 'required|string|max:100|unique:sub_categories',
-        // ]);
+        $request->validate([
+            'main_category_id' => 'required',
+            'sub_category_name' => 'required|string|max:100|unique:sub_categories,sub_category',
+        ]);
         SubCategory::create([
             'main_category_id' => $request->main_category_id,
             'sub_category' => $request->sub_category_name
