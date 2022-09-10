@@ -71,6 +71,9 @@ class CalendarView{
           $html[] = $day->selectPart($day->everyDay());
           if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
+          }else{
+            $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
+            $html[] = '<p p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</p>';
           }
         }
 
