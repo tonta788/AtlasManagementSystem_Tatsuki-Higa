@@ -122,11 +122,13 @@ class PostsController extends Controller
     }
 
     public function postLike(Request $request){
+        //もしユーザーが既に「いいね」していたら何もしない
         Auth::user()->likes()->attach($request->post_id);
         return response()->json();
     }
 
     public function postUnLike(Request $request){
+        //もし既に「いいね」していたら消す
         Auth::user()->likes()->detach($request->post_id);
         return response()->json();
     }

@@ -42,7 +42,6 @@ class CalendarView{
         $toDay = $this->carbon->copy()->format("Y-m-d");
 
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-          // $html[] = '<td class="calendar-td">';
           $html[] = '<td class="past-day border">';
         }else{
           $html[] = '<td class="calendar-td '.$day->getClassName().'">';
@@ -51,6 +50,8 @@ class CalendarView{
 
         if(in_array($day->everyDay(), $day->authReserveDay())){
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
+          $setting_reserve = $day->authReserveDate($day->everyDay())->first()->setting_reserve;
+          $reserve_setting_id = $day->authReserveDate($day->everyDay())->first()->id;
           if($reservePart == 1){
             $reservePart = "リモ1部";
           }else if($reservePart == 2){
@@ -62,8 +63,8 @@ class CalendarView{
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }else{
-            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'" >'. $reservePart .'</button>';
-            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts" >';
+            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75 cancel-modal-open" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'" setting_reserve='. $setting_reserve .' setting_part='. $reservePart .' reserve_setting_id='. $reserve_setting_id .'>'. $reservePart .'</button>';
+            $html[] = '<input type="hidden" name="getPart[]" value="" form="deleteParts" >';
           }
         }else if(in_array($day->everyDay(), $day->authReserveDay()) || $startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
           $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
