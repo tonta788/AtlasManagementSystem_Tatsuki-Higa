@@ -13,9 +13,10 @@ use DB;
 
 class CalendarsController extends Controller
 {
-    public function show(){
+    public function show($reserve_setting_id){
         $calendar = new CalendarView(time());
-        return view('authenticated.calendar.general.calendar', compact('calendar'));
+        $reserve_setting = ReserveSettings::with('users')->findOrFail($reserve_setting_id);
+        return view('authenticated.calendar.general.calendar', compact('calendar','reserve_setting'));
     }
 
     public function reserve(Request $request){
@@ -36,8 +37,9 @@ class CalendarsController extends Controller
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
 
-    public function delete(){
-       ReserveSettings::findOrFail($id)->delete();
-        return redirect()->route('calendar.general.show');
+    public function delete(Request $request){
+        $reserve_setting_id = $request->reserve_setting_id;
+       ReserveSettings::findOrFail($reserve_setting_id)->delete();
+        return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
 }
