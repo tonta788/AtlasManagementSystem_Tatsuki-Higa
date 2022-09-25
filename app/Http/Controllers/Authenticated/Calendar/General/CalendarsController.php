@@ -15,8 +15,7 @@ class CalendarsController extends Controller
 {
     public function show($reserve_setting_id){
         $calendar = new CalendarView(time());
-        $reserve_setting = ReserveSettings::with('users')->findOrFail($reserve_setting_id);
-        return view('authenticated.calendar.general.calendar', compact('calendar','reserve_setting'));
+        return view('authenticated.calendar.general.calendar', compact('calendar'));
     }
 
     public function reserve(Request $request){
@@ -38,8 +37,15 @@ class CalendarsController extends Controller
     }
 
     public function delete(Request $request){
-        $reserve_setting_id = $request->reserve_setting_id;
-       ReserveSettings::findOrFail($reserve_setting_id)->delete();
+        $deletePart = ReserveSettings::find($request->reserve_setting_id)->setting_part;
+        $deleteDate = ReserveSettings::find($request->reserve_setting_id)->setting_reserve;
+        $delete_settings = ReserveSettings::where('setting_reserve', $deleteDate)->where('setting_part', $deletePart)->first();
+                $delete_settings->increment('limit_users');
+                $delete_settings->users()->attach(Auth::id());
+
+        $reserve_settings = User::find(Auth::id());
+        $reserve_settings->reserveSettings()->detach($request->reserve_setting_id);
+
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
 }
