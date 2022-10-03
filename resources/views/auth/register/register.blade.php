@@ -80,8 +80,8 @@
         </div>
         <div class="mt-3">
           <label class="d-block m-0 aa" style="font-size:13px">生年月日</label>
-          @if($errors->first('birthday'))
-            <span class="error_message">{{ $errors->first('birthday') }}</span>
+          @if($errors->first('birth_day'))
+            <span class="error_message">{{ $errors->first('birth_day') }}</span>
           @endif
           <select class="old_year" name="old_year">
             <option value="none">-----</option>
