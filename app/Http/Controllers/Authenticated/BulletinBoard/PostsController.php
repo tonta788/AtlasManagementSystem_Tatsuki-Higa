@@ -78,7 +78,6 @@ class PostsController extends Controller
     }
 
     public function mainCategoryCreate(Request $request){
-        dd($request);
         $request->validate([
             'main_category_name' => 'required|string|max:100|unique:main_categories,main_category',
         ]);
