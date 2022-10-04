@@ -3,7 +3,6 @@ namespace App\Calendars\Admin;
 
 use Carbon\Carbon;
 use App\Models\Calendars\ReserveSettings;
-use App\Models\USers\User;
 
 class CalendarWeekDay{
   protected $carbon;
@@ -29,16 +28,15 @@ class CalendarWeekDay{
     $one_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->first();
     $two_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '2')->first();
     $three_part = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '3')->first();
-
     $html[] = '<div class="text-left">';
     if($one_part){
-      $html[] = '<p class="day_part m-0 pt-1">1部　'.$one_part->users()->count().' </p>';
+      $html[] = '<p class="day_part m-0 pt-1"><a href="/calendar/'.$one_part->id.'/'.$ymd.'/'.$one_part->setting_part.'">1部</a>　'.$one_part->users()->count().' </p>';
     }
     if($two_part){
-      $html[] = '<p class="day_part m-0 pt-1">2部　'.$two_part->users()->count().'</p>';
+      $html[] = '<p class="day_part m-0 pt-1"><a href="/calendar/'.$two_part->id.'/'.$ymd.'/'.$two_part->setting_part.'">2部</a>　'.$two_part->users()->count().'</p>';
     }
     if($three_part){
-      $html[] = '<p class="day_part m-0 pt-1">3部　'.$three_part->users()->count().'</p>';
+      $html[] = '<p class="day_part m-0 pt-1"><a href="/calendar/'.$three_part->id.'/'.$ymd.'/'.$three_part->setting_part.'">3部</a>　'.$three_part->users()->count().'</p>';
     }
     $html[] = '</div>';
 
