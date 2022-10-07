@@ -57,7 +57,7 @@
   <div class="modal__content">
     <form action="{{ route('post.edit') }}" method="post">
       <div class="w-100">
-        <div class="modal-inner-title w-50 m-auto">
+        <div class="modal-inner-title w-50 m-auto" style="height:25px;">
         @if($errors->first('post_title'))
         <span class="error_message">{{ $errors->first('post_title') }}</span>
         @endif

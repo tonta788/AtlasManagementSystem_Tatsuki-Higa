@@ -184,6 +184,10 @@ li {
   justify-content: space-between;
 }
 
+.cancel-modal-btn {
+  justify-content: space-between;
+}
+
 /* 掲示板 コメント */
 .comment_container {
   background: #FFF;
@@ -202,6 +206,10 @@ li {
 
 .comment_container span {
   font-size: 12px;
+}
+
+.post_status {
+  margin: 0 0 0 auto;
 }
 
 .post_status span {

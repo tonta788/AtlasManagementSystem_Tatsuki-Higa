@@ -17,7 +17,7 @@
 </div>
 <div class="modal js-modal">
   <div class="modal__bg js-modal-close"></div>
-  <div class="modal__content">
+  <div class="modal__content" style="width:40%;">
       <div class="w-100">
         <div>
         <label for="setting_reserve">予約日：<p class="modal-inner-reserve w-100" name="setting_reserve">
@@ -28,7 +28,7 @@
         </p></label>
         </div>
         <p>上記の予約をキャンセルしてもよろしいですか？</p>
-        <div class="w-75 m-auto edit-modal-btn d-flex">
+        <div class="w-100 m-auto cancel-modal-btn d-flex">
           <a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>
           <input type="hidden" class="cancel-modal-hidden" name="reserve_setting_id" value="" form="deleteParts">
           <input type="submit" class="btn btn-primary d-block" value="キャンセル" onclick="return confirm('キャンセルしてよろしいですか？')" form="deleteParts">
