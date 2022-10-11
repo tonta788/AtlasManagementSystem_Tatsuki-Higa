@@ -64,6 +64,11 @@ li {
   font-size: 12px;
 }
 
+.pt-1 {
+  display: flex;
+  justify-content: space-around;
+}
+
 .adjust-table {
   width: 70% !important;
 }

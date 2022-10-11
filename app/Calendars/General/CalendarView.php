@@ -19,7 +19,7 @@ class CalendarView{
   function render(){
     $html = [];
     $html[] = '<div class="calendar text-center">';
-    $html[] = '<table class="table">';
+    $html[] = '<table class="table" style="margin-bottom: 0em;">';
     $html[] = '<thead>';
     $html[] = '<tr>';
     $html[] = '<th>月</th>';
